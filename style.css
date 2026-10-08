@@ -1,0 +1,410 @@
+/* 패딩과 테두리를 포함해 너비를 계산 */
+* {
+  box-sizing: border-box;
+}
+
+/* 따뜻한 베이지 배경과 가운데 정렬 */
+body {
+  margin: 0;
+  padding: 32px 16px 48px;
+  background: #faf6f0;
+  color: #49372b;
+  font-family: '맑은 고딕', sans-serif;
+  line-height: 1.6;
+}
+
+header,
+main {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+/* 카페 로고와 소개 */
+header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  color: #6b4226;
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+.cafe-logo {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 60px;
+  transform-origin: center bottom;
+  animation: cafe-logo-sway 4s ease-in-out infinite;
+}
+
+/* 커피 로고가 천천히 좌우로 흔들리는 애니메이션 */
+@keyframes cafe-logo-sway {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+header p {
+  margin: 0;
+  color: #826b59;
+  font-size: 15px;
+  word-break: keep-all;
+}
+
+/* 둥근 주문서 카드와 부드러운 그림자 */
+#order-form,
+#orders-panel {
+  padding: 28px;
+  border: 1px solid #eadfd2;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(107, 66, 38, 0.09);
+}
+
+#order-form > div:not(#order-confirmation) {
+  margin-bottom: 20px;
+}
+
+#order-form > div > label,
+legend {
+  color: #6b4226;
+  font-weight: 700;
+}
+
+#order-form > div > label {
+  display: block;
+  margin-bottom: 7px;
+}
+
+/* 입력칸은 가용 너비를 채우고 모바일에서도 읽기 쉽게 표시 */
+input[type='text'],
+input[type='tel'],
+input[type='number'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #d9cbbd;
+  border-radius: 8px;
+  background: #fffdfa;
+  color: #49372b;
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* 키보드와 마우스 포커스를 갈색 테두리와 그림자로 표시 */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #6b4226;
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(107, 66, 38, 0.15);
+}
+
+/* 기존 HTML 구조를 유지하면서 입력 요소와 라벨을 쌍으로 배치 */
+fieldset {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px 8px;
+  min-width: 0;
+  margin: 0 0 20px;
+  padding: 12px;
+  border: 1px solid #eadfd2;
+  border-radius: 10px;
+  background: #faf6f0;
+}
+
+fieldset:has(input[type='radio']) {
+  grid-template-columns: repeat(3, auto minmax(0, 1fr));
+}
+
+legend {
+  padding: 0 6px;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #6b4226;
+  cursor: pointer;
+}
+
+fieldset label {
+  font-size: 14px;
+  word-break: keep-all;
+  cursor: pointer;
+}
+
+/* 주문 버튼 바로 위의 예상 금액 */
+#estimated-price {
+  margin: 26px 0 18px;
+  color: #6b4226;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* 주문하기와 다시 작성 버튼 */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #6b4226;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+#submit-order {
+  background: #6b4226;
+  color: #ffffff;
+}
+
+#submit-order:hover {
+  background: #815336;
+  /* 마우스를 올리면 살짝 떠오르는 효과 */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(107, 66, 38, 0.2);
+}
+
+/* 저장 중에는 버튼을 흐리게 표시하고 떠오르는 효과를 멈춤 */
+#submit-order:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+#submit-order:disabled:hover {
+  background: #6b4226;
+  transform: none;
+  box-shadow: none;
+}
+
+#reset-order {
+  margin-top: 10px;
+  background: #ffffff;
+  color: #6b4226;
+}
+
+#reset-order:hover {
+  background: #faf6f0;
+}
+
+#reset-order:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+button:focus-visible {
+  outline: 2px solid #6b4226;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(107, 66, 38, 0.15);
+}
+
+/* 주문 확인 메시지는 연두색 배경과 초록색 글씨로 표시 */
+#order-confirmation {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #edf6df;
+  color: #2f642f;
+  overflow-wrap: anywhere;
+}
+
+/* 숨김 클래스와 기존 hidden 속성 모두 지원 */
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+/* 카페 소개 아래의 탭 메뉴와 선택된 탭의 갈색 밑줄 */
+.tab-menu {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+  border-bottom: 1px solid #e2d4c6;
+}
+
+.tab-button {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+  padding: 12px 6px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #94735d;
+  font-size: 15px;
+}
+
+.tab-button:hover {
+  background: #f1e8dc;
+}
+
+.tab-button.active {
+  border-bottom-color: #6b4226;
+  color: #6b4226;
+}
+
+/* 주문 건수를 보여주는 둥근 갈색 배지 */
+.order-count {
+  min-width: 24px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #6b4226;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+/* 주문 한 건마다 베이지 카드와 왼쪽 갈색 세로줄을 표시 */
+.orders-list {
+  display: grid;
+  gap: 14px;
+}
+
+.order-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 16px;
+  border-left: 4px solid #6b4226;
+  border-radius: 10px;
+  background: #faf6f0;
+  overflow-wrap: anywhere;
+}
+
+.order-card p {
+  margin: 0;
+}
+
+.order-card .order-heading {
+  color: #6b4226;
+  font-weight: 700;
+}
+
+.order-card .order-details {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.order-card .order-meta {
+  margin-top: 8px;
+  color: #826b59;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+.cancel-order {
+  width: auto;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #6b4226;
+  font-size: 13px;
+}
+
+.cancel-order:hover,
+#clear-orders:hover:not(:disabled) {
+  background: #f1e8dc;
+}
+
+#orders-empty {
+  margin: 12px 0 24px;
+  color: #826b59;
+  text-align: center;
+}
+
+.orders-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #eadfd2;
+}
+
+#orders-total {
+  margin: 0 0 14px;
+  color: #6b4226;
+  font-weight: 700;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+#clear-orders {
+  background: #ffffff;
+  color: #6b4226;
+}
+
+#clear-orders:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* 휴대폰 화면에서는 카드 여백을 줄임 */
+@media (max-width: 480px) {
+  body {
+    padding: 24px 12px 32px;
+  }
+
+  #order-form,
+  #orders-panel {
+    padding: 20px;
+    border-radius: 16px;
+  }
+}
+
+/* 아주 좁은 화면에서는 선택 항목을 다음 줄로 배치 */
+@media (max-width: 360px) {
+  fieldset {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  fieldset:has(input[type='radio']) {
+    grid-template-columns: repeat(2, auto minmax(0, 1fr));
+  }
+}
+
+/* 움직임 감소 설정을 사용하면 전환 효과와 로고 애니메이션을 생략 */
+@media (prefers-reduced-motion: reduce) {
+  input,
+  select,
+  textarea,
+  button {
+    transition: none;
+  }
+
+  #submit-order:hover {
+    transform: none;
+  }
+
+  .cafe-logo {
+    animation: none;
+  }
+}
